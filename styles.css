@@ -1,0 +1,142 @@
+body, html {
+  background: #222;
+  font-family: sans-serif;
+}
+
+#chess-timer-app {
+  width: calc(100vw - 20px);
+  height: calc(100vh - 20px);
+  display: flex;
+  align-items: center;
+  
+}
+
+.result {
+  margin: 0 auto;
+  width: 400px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: green;
+}
+
+.chess-timer {
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  border: 10px solid #25314b;
+  position: relative;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+.player-container {
+  width: 700px;
+  display: flex;
+}
+
+.player {
+  flex: 0 0 349px;
+  height: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: pink;
+}
+
+.active .player-name {
+  color: #ffd5a4;
+}
+
+.not-active .player-name {
+  color: #9ed5ff;
+}
+
+.player-name {
+  margin: 0;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: white;
+}
+
+.player:first-child{
+border-right:1px solid #25314b;
+}
+
+.player:last-child{
+  border-left:1px solid #25314b;
+}
+
+.player.active{
+  background: #a26f30;
+}
+
+.player.not-active{
+  background: #2c75ac;
+}
+
+.button-player {
+  background: #25314b;
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -40px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  -webkit-transition: top 0.25s ease;
+  -moz-transition: top  0.25s ease;
+  transition: top 0.25s ease;
+}
+
+.button-player:hover {
+  cursor: pointer;
+}
+
+.button-player.not-pressed{
+  top: -30px;
+}
+
+.button-player.pressed{
+  top: -40px;
+}
+
+.button-start-match {
+  -webkit-transition: displary 0.25s;
+  -moz-transition: displary 0.25s;
+  transition: displary 0.25s;
+}
+
+.button-start-over {
+  color: #efefef;
+  position: absolute;
+  font-size: 1.5em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -40px;
+}
+
+.button-start-over:hover {
+  cursor: pointer;
+  text-shadow: 0 0 2px #efefef;
+}
+
+.clock {
+  font-family: monospace;
+  color: white;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+}
