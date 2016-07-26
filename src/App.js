@@ -1,63 +1,61 @@
 // Modules
-import React from 'react'
-import TimerMixin from 'react-timer-mixin'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
+import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 
 // Components
 import Player from './components/player/player'
 
 // Code
-import { timerTick, startMatch, playerClick, restartMatch, setStartingPlayer } from './actions/actions'
+import {
+  timerTick,
+  startMatch,
+  playerClick,
+  restartMatch,
+  setStartingPlayer
+} from './actions/actions'
 
-export const App = React.createClass({
-  propTypes: {
-    player1CurrentTime: React.PropTypes.string,
-    player2CurrentTime: React.PropTypes.string,
-    matchInProgress: React.PropTypes.bool
-  },
+class App extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  mixins: [TimerMixin, PureRenderMixin],
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
 
-  setIsPlaying: function () {
+  setIsPlaying() {
     return true;
-  },
+  }
 
-  updateTimer: function () {
+  updateTimer() {
     if (this.props.matchInProgress) {
       this.props.dispatch(timerTick)
     }
-  },
+  }
 
-  componentDidMount: function () {
-    this.timer = setInterval(this.updateTimer, 1000)
-  },
-
-  componentWillMount: function () {
-    clearInterval(this.timer)
-  },
-
-  handlePlayerClick: function (e) {
-    let id = e.currentTarget.id
-    let player = id.substring(id.lastIndexOf('-') + 1)
+  handlePlayerClick(player) {
     if (!this.props.matchInProgress) {
+      this.timer = setInterval(() => {
+        this.updateTimer()
+      }, 1000)
       return this.props.dispatch(setStartingPlayer(player))
     }
     this.props.dispatch(playerClick(player))
-  },
+  }
 
-  restartMatch: function () {
+  restartMatch() {
+    clearInterval(this.timer)
     this.props.dispatch(restartMatch)
-  },
+  }
 
-  render: function () {
+  render() {
     if (this.props.winner !== null) {
       return (
         <div className="result">
           <h1>{`Player ${this.props.winner} wins!`}</h1>
           <i
             className="fa fa-refresh button-start-over"
-            onClick={this.restartMatch}
+            onClick={this.restartMatch.bind(this) }
             title="Restart Match"
             />
         </div>
@@ -69,25 +67,31 @@ export const App = React.createClass({
           <Player
             player={1}
             currentTime={this.props.remainingTimePlayer1}
-            handleClick={this.handlePlayerClick}
+            handleClick={this.handlePlayerClick.bind(this) }
             isActive={+this.props.activePlayer === 1}
             />
           <Player
             player={2}
             currentTime={this.props.remainingTimePlayer2}
-            handleClick={this.handlePlayerClick}
+            handleClick={this.handlePlayerClick.bind(this) }
             isActive={+this.props.activePlayer === 2}
             />
         </div>
         <i
           className="fa fa-refresh button-start-over"
-          onClick={this.restartMatch}
+          onClick={this.restartMatch.bind(this) }
           title="Restart Match"
           />
       </div>
     )
   }
-})
+}
+
+App.propTypes = {
+  player1CurrentTime: PropTypes.string,
+  player2CurrentTime: PropTypes.string,
+  matchInProgress: PropTypes.bool
+}
 
 const mapStateToProps = function (state) {
   return {

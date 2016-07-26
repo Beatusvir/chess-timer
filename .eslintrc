@@ -1,6 +1,7 @@
 {
   "extends": [
-    "eslint:recommended", "plugin:react/recommended"
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -12,7 +13,10 @@
     "react"
   ],
   "rules": {
-    "quotes": [2, "single"],
+    "quotes": [
+      2,
+      "single"
+    ],
     "no-console": 0,
     "no-unused-vars": 0,
     "react/display-name": 0,

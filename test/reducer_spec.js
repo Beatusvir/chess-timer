@@ -1,10 +1,14 @@
 import { expect } from 'chai'
 import { Map } from 'immutable'
 import reducer from '../src/reducers/reducer'
-import { START_MATCH, END_MATCH, TIMER_TICK } from '../src/actions/actions'
+import {
+  START_MATCH,
+  END_MATCH,
+  TIMER_TICK }
+from '../src/actions/types'
 
-describe('reducer', function(){
-  it('sets initial state', function(){
+describe('reducer', () => {
+  it('sets initial state', () => {
     const action = { type: 'SET_STATE' }
     const nextState = reducer(undefined, action)
 
@@ -17,7 +21,7 @@ describe('reducer', function(){
     })
   })
 
-  it('handles start of the match', function(){
+  it('handles start of the match', () => {
     const action = { type: START_MATCH }
     const nextState = reducer(undefined, action)
 
@@ -30,7 +34,7 @@ describe('reducer', function(){
     })
   })
 
-  it('handles end of the match', function(){
+  it('handles end of the match', () => {
     const action = { type: END_MATCH, winner: 1 }
     const nextState = reducer(undefined, action)
 
@@ -43,7 +47,7 @@ describe('reducer', function(){
     })
   })
 
-  it('handles timer tick when both @ 4:00', function(){
+  it('handles timer tick when both @ 4:00', () => {
     const action = { type: TIMER_TICK }
     var currentState = Map({
       activePlayer: 1,
@@ -63,7 +67,7 @@ describe('reducer', function(){
     })
   })
 
-  it('handles timer tick when a time is 0:01', function(){
+  it('handles timer tick when a time is 0:01', () => {
     const action = { type: TIMER_TICK }
     var currentState = Map({
       activePlayer: 2,

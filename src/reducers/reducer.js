@@ -1,7 +1,5 @@
 import { Map } from 'immutable'
-import {
-  START_MATCH, END_MATCH, TIMER_TICK, PLAYER_CLICK, RESTART_MATCH, SET_STARTING_PLAYER
-} from '../actions/actions'
+import * as ActionTypes from '../actions/types'
 
 const initialState = Map({
   activePlayer: null,
@@ -67,18 +65,18 @@ function newTime(time) {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case RESTART_MATCH:
+    case ActionTypes.RESTART_MATCH:
       return state.merge(initialState)
-    case START_MATCH:
+    case ActionTypes.START_MATCH:
       return state.merge(Map({ matchInProgress: true }))
-    case END_MATCH:
+    case ActionTypes.END_MATCH:
       return state.merge(Map({ matchInProgress: false, winner: action.winner }))
-    case TIMER_TICK:
+    case ActionTypes.TIMER_TICK:
       var newState = timerTick(state)
       return state.merge(newState)
-    case PLAYER_CLICK:
+    case ActionTypes.PLAYER_CLICK:
       return state.merge(Map({ activePlayer: +action.player === 1 ? 2 : 1 }))
-    case SET_STARTING_PLAYER:
+    case ActionTypes.SET_STARTING_PLAYER:
       return state.merge(Map({ matchInProgress: true, activePlayer: action.player }))
     default:
       return state;

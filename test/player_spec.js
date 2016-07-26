@@ -1,12 +1,12 @@
 import { expect } from 'chai'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { renderIntoDocument, scryRenderedDOMComponentsWithClass, scryRenderedDOMComponentsWithTag } from 'react-addons-test-utils'
+import { shallow } from 'enzyme'
 import Player from '../src/components/player/player'
 
-describe('player component', function(){
-  it('renders an active player element', function(){
-    const component = renderIntoDocument(
+describe('player component', () => {
+  it('renders an active player element', () => {
+    const component = shallow(
       <Player
         currentTime="4:00"
         isActive={true}
@@ -14,13 +14,10 @@ describe('player component', function(){
         />
     )
 
-    const playerComponent = scryRenderedDOMComponentsWithClass(component,'player active')
-
-    expect(playerComponent.length).to.equal(1)
-    expect(playerComponent)
+    expect(component.find('.active').length).to.equal(1)
   })
-  it('renders an inactive player element', function(){
-    const component = renderIntoDocument(
+  it('renders an inactive player element', () => {
+    const component = shallow(
       <Player
         currentTime="4:00"
         isActive={false}
@@ -28,8 +25,6 @@ describe('player component', function(){
         />
     )
 
-    const playerComponent = scryRenderedDOMComponentsWithClass(component,'player not-active')
-
-    expect(playerComponent.length).to.equal(1)
+    expect(component.find('.not-active').length).to.equal(1)
   })
 })

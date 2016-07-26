@@ -1,0 +1,6 @@
+export const RESTART_MATCH = 'RESTART_MATCH'
+export const START_MATCH = 'START_MATCH'
+export const END_MATCH = 'END_MATCH'
+export const TIMER_TICK = 'TIMER_TICK'
+export const PLAYER_CLICK = 'PLAYER_CLICK'
+export const SET_STARTING_PLAYER = 'SET_STARTING_PLAYER' 
