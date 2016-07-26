@@ -1,5 +1,5 @@
 # Chess Timer
-Coding challange from BairesDev
+Coding challange from buildabonfire.com
 
 ## Install
 * Clone `git clone https://github.com/beatusvir/chess-timer`
